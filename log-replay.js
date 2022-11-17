@@ -18,11 +18,13 @@ async function processLineByLine() {
       let thisTime = new Date(d);
       let diff = thisTime.getTime() - lastTime.getTime();
       if (diff > 0) {
+	rl.pause();
         await new Promise(resolve => setTimeout(resolve, diff));
+	rl.resume();
       }
       lastTime = new Date(thisTime);
     }
-    console.log(line);
+    process.stdout.write(line + "\n");
   }
 }
 
